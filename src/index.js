@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import './index.scss';
 
 function RootComponent() {
-    return <h2>Store React app</h2>;
+	return <h2>Store React app</h2>;
 }
-const domContainer = document.querySelector('.store-wrapper');
-render(<RootComponent />, domContainer);
+const domContainer = document.querySelector( '.store-wrapper' );
+render( <RootComponent />, domContainer );
