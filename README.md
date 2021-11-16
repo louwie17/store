@@ -16,3 +16,6 @@ See [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packa
 
 See [wp-scripts](https://github.com/WordPress/gutenberg/tree/master/packages/scripts) for more usage information.
 
+## Helpful links
+
+[React docs](https://reactjs.org/docs/hello-world.html)
