@@ -1,1 +1,35 @@
 // Add styles here.
+.add-products .button-group {
+	display: block;
+	margin-top: 20px;
+}
+
+.store-wrapper {
+	width: 500px;
+	max-width: 100%;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: 15px;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 100%;
+	flex: 3;
+}
+
+.column.price {
+	flex: 1;
+}
+
+textarea.description {
+	width: 100%;
+	height: 150px;
+	margin-bottom: 15px;
+}
