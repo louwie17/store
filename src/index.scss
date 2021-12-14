@@ -22,10 +22,10 @@
 	flex-direction: column;
 	flex-basis: 100%;
 	flex: 3;
-}
 
-.column.price {
-	flex: 1;
+	&.price {
+		flex: 1;
+	}
 }
 
 textarea.description {

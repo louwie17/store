@@ -1,63 +1,42 @@
 // Import SCSS entry file so that webpack picks up changes
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
 import { ProductItem } from './ProductItem.js';
 import './index.scss';
 
-class RootComponent extends Component {
-	state = {
-		canSave: false,
-		viewButtonRow: false,
+const RootComponent = () => {
+	const [ canSave, enableSave ] = useState( false );
+	const [ viewButtonRow, viewCancelSave ] = useState( false );
+
+	const hideCancelSave = () => {
+		viewCancelSave( false );
 	};
 
-	viewCancelSave = () => {
-		this.setState( {
-			viewButtonRow: true,
-		} );
+	const handleSave = ( v ) => {
+		enableSave( v );
 	};
 
-	hideCancelSave = () => {
-		this.setState( {
-			viewButtonRow: false,
-		} );
-	};
-
-	disableSave = () => {
-		this.setState( {
-			canSave: false,
-		} );
-	};
-
-	enableSave = () => {
-		this.setState( {
-			canSave: true,
-		} );
-	};
-
-	render() {
-		return (
-			<>
-				<h2>Store React app</h2>
-				<div className="add-product">
-					<button
-						className="button button-primary"
-						onClick={ this.viewCancelSave }
-						disabled={ this.state.viewButtonRow }
-					>
-						Add Product
-					</button>
-				</div>
-				{ this.state.viewButtonRow && (
-					<ProductItem
-						canSave={ this.state.canSave }
-						disableSave={ this.disableSave }
-						enableSave={ this.enableSave }
-						hideCancelSave={ this.hideCancelSave }
-					/>
-				) }
-			</>
-		);
-	}
-}
+	return (
+		<>
+			<h2>Store React app</h2>
+			<div className="add-product">
+				<button
+					className="button button-primary"
+					onClick={ () => viewCancelSave( true ) }
+					disabled={ viewButtonRow }
+				>
+					Add Product
+				</button>
+			</div>
+			{ viewButtonRow && (
+				<ProductItem
+					canSave={ canSave }
+					handleSave={ handleSave }
+					hideCancelSave={ hideCancelSave }
+				/>
+			) }
+		</>
+	);
+};
 const domContainer = document.querySelector( '.store-wrapper' );
 render( <RootComponent />, domContainer );
