@@ -73,3 +73,30 @@ function add_extension_register_script() {
 }
 
 add_action( 'admin_enqueue_scripts', 'add_extension_register_script' );
+
+// Load REST API Endpoint
+require_once plugin_dir_path( __FILE__ ) . 'endpoints.php';
+
+// Create our table during plugin activation
+function ijab_store_table_create () {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . "store_products"; 
+
+	$charset_collate = $wpdb->get_charset_collate();
+
+	$sql = "CREATE TABLE $table_name (
+		id mediumint(9) NOT NULL AUTO_INCREMENT,
+		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		title tinytext NOT NULL,
+		price bigint(20) NOT NULL,
+		description longtext NOT NULL,
+		PRIMARY KEY  (id)
+	) $charset_collate;";
+
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	dbDelta( $sql );
+
+}
+register_activation_hook( __FILE__, 'ijab_store_table_create' );
