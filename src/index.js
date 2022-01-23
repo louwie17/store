@@ -1,8 +1,10 @@
 // Import SCSS entry file so that webpack picks up changes
 import React, { useState, useEffect } from 'react';
+import apiFetch from '@wordpress/api-fetch';
 import { render } from 'react-dom';
 import { ProductItem } from './ProductItem';
 import { ProductList } from './ProductList';
+import { List } from './DataStore';
 import './index.scss';
 
 const RootComponent = () => {
@@ -18,10 +20,18 @@ const RootComponent = () => {
 	};
 
 	useEffect( () => {
-		fetch( 'http://localhost:8888/wp-json/ijab-store/v1/products' )
-			.then( ( response ) => response.json() )
-			.then( ( response ) => updateProductList( response ) );
+		retrieveTutorials();
 	}, [] );
+
+	const retrieveTutorials = () => {
+		List()
+			.then( ( response ) => {
+				updateProductList( response );
+			} )
+			.catch( ( e ) => {
+				console.log( e );
+			} );
+	};
 
 	return (
 		<>

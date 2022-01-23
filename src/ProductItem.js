@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Create } from './DataStore';
+import { ProductList } from './ProductList';
 
 export const ProductItem = ( props ) => {
 	const [ title, setTitle ] = useState( '' );
@@ -20,33 +22,22 @@ export const ProductItem = ( props ) => {
 	};
 
 	const handleSubmit = ( e ) => {
-		const newItem = {
+		e.preventDefault();
+		const data = {
 			title,
 			price,
 			description,
 		};
-		e.preventDefault();
-		fetch( 'http://localhost:8888/wp-json/ijab-store/v1/products', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify( {
-				title,
-				price,
-				description,
-			} ),
-		} )
+		Create( data )
 			.then( ( response ) => {
 				console.log( response );
+				setTitle( '' );
+				setPrice( '' );
+				setDescription( '' );
 			} )
 			.catch( ( problem ) => {
 				console.log( problem );
 			} );
-		setTitle( '' );
-		setPrice( '' );
-		setDescription( '' );
 	};
 
 	return (
