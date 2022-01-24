@@ -20,10 +20,6 @@ const RootComponent = () => {
 	};
 
 	useEffect( () => {
-		retrieveProducts();
-	}, [] );
-
-	const retrieveProducts = () => {
 		List()
 			.then( ( response ) => {
 				updateProductList( response );
@@ -31,7 +27,7 @@ const RootComponent = () => {
 			.catch( ( e ) => {
 				console.log( e );
 			} );
-	};
+	}, [] );
 
 	return (
 		<>
