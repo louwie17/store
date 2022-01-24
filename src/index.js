@@ -1,40 +1,58 @@
 // Import SCSS entry file so that webpack picks up changes
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import apiFetch from '@wordpress/api-fetch';
 import { render } from 'react-dom';
-import { ProductItem } from './ProductItem.js';
+import { ProductItem } from './ProductItem';
+import { ProductList } from './ProductList';
+import { List } from './DataStore';
 import './index.scss';
 
 const RootComponent = () => {
-	const [ canSave, enableSave ] = useState( false );
 	const [ viewButtonRow, viewCancelSave ] = useState( false );
+	const [ productList, updateProductList ] = useState( [] );
 
-	const hideCancelSave = () => {
+	const onCancel = () => {
 		viewCancelSave( false );
 	};
 
-	const handleSave = ( v ) => {
-		enableSave( v );
+	const onProductSave = () => {
+		viewCancelSave( true );
 	};
+
+	useEffect( () => {
+		List()
+			.then( ( response ) => {
+				updateProductList( response );
+			} )
+			.catch( ( e ) => {
+				console.log( e );
+			} );
+	}, [] );
 
 	return (
 		<>
-			<h2>Store React app</h2>
-			<div className="add-product">
-				<button
-					className="button button-primary"
-					onClick={ () => viewCancelSave( true ) }
-					disabled={ viewButtonRow }
-				>
-					Add Product
-				</button>
+			<div className="row">
+				<h1 className="column">All Products</h1>
+				<div className="column add-product">
+					<p>
+						<button
+							className="button button-primary"
+							onClick={ () => viewCancelSave( true ) }
+							disabled={ viewButtonRow }
+						>
+							Add Product
+						</button>
+					</p>
+				</div>
 			</div>
 			{ viewButtonRow && (
 				<ProductItem
-					canSave={ canSave }
-					handleSave={ handleSave }
-					hideCancelSave={ hideCancelSave }
+					onCancel={ onCancel }
+					onProductSave={ onProductSave }
+					updateProductList={ updateProductList }
 				/>
 			) }
+			<ProductList productList={ productList } />
 		</>
 	);
 };

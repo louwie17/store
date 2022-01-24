@@ -5,8 +5,16 @@
 }
 
 .store-wrapper {
-	width: 500px;
+	width: 750px;
 	max-width: 100%;
+
+	h1 {
+		padding-bottom: 15px;
+	}
+}
+
+.product-wrapper {
+	margin-bottom: 45px;
 }
 
 .row {
@@ -32,4 +40,25 @@ textarea.description {
 	width: 100%;
 	height: 150px;
 	margin-bottom: 15px;
+}
+
+.product-list {
+	width: 100%;
+
+	.row {
+		padding-bottom: 15px;
+		border-bottom: 1px solid #ccc;
+	}
+
+	.column.title {
+		flex-grow: 2;
+	}
+
+	.column.price {
+		flex-grow: 1;
+	}
+
+	.column.description {
+		flex-grow: 3;
+	}
 }
