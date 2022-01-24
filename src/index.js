@@ -49,6 +49,7 @@ const RootComponent = () => {
 				<ProductItem
 					onCancel={ onCancel }
 					onProductSave={ onProductSave }
+					updateProductList={ updateProductList }
 				/>
 			) }
 			<ProductList productList={ productList } />

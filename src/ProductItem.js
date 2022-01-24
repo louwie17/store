@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Create } from './DataStore';
+import { Create, List } from './DataStore';
 import { ProductList } from './ProductList';
 
 export const ProductItem = ( props ) => {
@@ -30,7 +30,14 @@ export const ProductItem = ( props ) => {
 		};
 		Create( data )
 			.then( ( response ) => {
-				console.log( response );
+				List( response )
+					.then( ( listed ) => {
+						props.updateProductList( listed );
+					} )
+					.catch( ( error2 ) => {
+						console.log( error2 );
+					} );
+
 				setTitle( '' );
 				setPrice( '' );
 				setDescription( '' );
