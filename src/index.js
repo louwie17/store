@@ -20,10 +20,10 @@ const RootComponent = () => {
 	};
 
 	useEffect( () => {
-		retrieveTutorials();
+		retrieveProducts();
 	}, [] );
 
-	const retrieveTutorials = () => {
+	const retrieveProducts = () => {
 		List()
 			.then( ( response ) => {
 				updateProductList( response );
